@@ -20,28 +20,6 @@ GameMap::GameMap(int size)
 	this->renderMap["dead"] = 'x';
 }
 
-void GameMap::renderPlane()
-{
-	//strength threshold
-	int strengthVal = 10;
 
-	for(int i = 0;i<this->mapSize;i++)
-	{
-		for(int j = 0;j<this->mapSize*2;j++)
-		{
-			Entity * field = this->plane[i][j];
-			if(field == NULL)
-			{
-				cout<<".";
-				continue;
-			}
-			if(field->entityName()=="prey") 
-			{
-				// check the strenght of the prey
-				continue;
-			}
-			cout<<this->renderMap[field->entityName()];
-		}
-		cout<<endl;
-	}
-}
+
+//getPlayer is in Player.cpp

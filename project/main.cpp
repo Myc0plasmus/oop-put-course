@@ -1,10 +1,13 @@
 #include<bits/stdc++.h>
-#include "include/GameMap.h"
+#include "include/Player.h"
 
 using namespace std;
 
+string Player::name="player";
 int main()
 {
-	GameMap map(50);
-	map.renderPlane();
+	GameMap gmap(50);
+	Player player(&gmap);		
+	gmap.getPlayer(&player);
+	while(true) gmap.renderPlane();
 }

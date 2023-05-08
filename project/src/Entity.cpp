@@ -15,5 +15,4 @@ void Entity::confirmDecision(bool confirmation){
 	this->pos = new position(prefferedPos);
 	delete(this->prefferedPos);
 	this->prefferedPos = NULL;
-	
 }
