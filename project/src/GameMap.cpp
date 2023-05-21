@@ -29,16 +29,16 @@ void GameMap::initPlane()
 	for(int i = 0;i<this->mapSize;i++)
 	{
 			Wall * newWall = new Wall(0,i,"horizontalWall");
-			this->immobile.push_back((Entity *)newWall);
+			this->immobile.push_back(newWall);
 			this->plane[0][i] = this->immobile.back();
 			newWall = new Wall(2*this->mapSize-1,i,"horizontalWall");
-			this->immobile.push_back((Entity *)newWall);
+			this->immobile.push_back(newWall);
 			this->plane[2*this->mapSize-1][i] = this->immobile.back();
 			newWall = new Wall(i,0,"verticalWall");
-			this->immobile.push_back((Entity *)newWall);
+			this->immobile.push_back(newWall);
 			this->plane[i][0] = this->immobile.back();
 			newWall = new Wall(i,2*this->mapSize-1,"verticalWall");
-			this->immobile.push_back((Entity *)newWall);
+			this->immobile.push_back(newWall);
 			this->plane[i][2*this->mapSize-1] = this->immobile.back();
 	}
 }

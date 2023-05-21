@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Wall : Entity 
+class Wall : public Entity 
 {
 	private:
 		const string name;
