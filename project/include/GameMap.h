@@ -1,7 +1,8 @@
+#pragma once
 #include<bits/stdc++.h>
+#include "Position.h"
 #include "Entity.h"
-
-using namespace std;
+#include "Player.h"
 
 class Player;
 
@@ -15,5 +16,6 @@ class GameMap{
 		Entity *** plane;
 		GameMap(int size);
 		void renderPlane();
+		void refreshPlane();
 		void getPlayer(Player * newPlayerPtr);
 };

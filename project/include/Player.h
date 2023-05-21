@@ -1,11 +1,15 @@
+#pragma once
 #include<bits/stdc++.h>
 #include "GameMap.h"
+#include "Entity.h"
 
 using namespace std;
 
+class GameMap;
+
 class Player : public Entity{
 	private:
-		static string name;
+		const string name;
 		map<char,position> moveMap;
 		GameMap * gameMap;
 	public:

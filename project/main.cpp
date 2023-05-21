@@ -1,13 +1,20 @@
 #include<bits/stdc++.h>
+#include "include/Position.h"
+#include "include/Entity.h"
 #include "include/Player.h"
+#include "include/GameMap.h"
+#include<ncurses.h>
 
 using namespace std;
 
-string Player::name="player";
 int main()
 {
-	GameMap gmap(50);
+	initscr();
+	curs_set(0);
+	noecho();
+	GameMap gmap(20);
 	Player player(&gmap);		
 	gmap.getPlayer(&player);
 	while(true) gmap.renderPlane();
+	endwin();
 }

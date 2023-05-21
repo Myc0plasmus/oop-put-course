@@ -10,7 +10,7 @@ position Entity::givePosition()
 }
 
 void Entity::confirmDecision(bool confirmation){
-	if(!confirmation) return;
+	if(!confirmation || this->prefferedPos == NULL) return;
 	delete(this->pos);
 	this->pos = new position(prefferedPos);
 	delete(this->prefferedPos);

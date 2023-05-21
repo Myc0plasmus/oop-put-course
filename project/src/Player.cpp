@@ -1,17 +1,19 @@
 #include<bits/stdc++.h>
+#include "../include/Position.h"
+#include "../include/Entity.h"
 #include "../include/Player.h"
+#include "../include/GameMap.h"
 #include<ncurses.h>
 
 using namespace std;
 
-Player::Player(){
-	this->pos->x = 10;
-	this->pos->y = 10;
-	
-	this->moveMap['w'] = position(0,1);
+Player::Player() : name("player"){
+	this->pos = new position(15,15);
+	this->prefferedPos = NULL;
+	this->moveMap['w'] = position(0,-1);
 	this->moveMap['a'] = position(-1,0);
-	this->moveMap['d'] = position(1,1);
-	this->moveMap['s'] = position(0,-1);
+	this->moveMap['d'] = position(1,0);
+	this->moveMap['s'] = position(0,1);
 }
 
 Player::Player(GameMap  * gameMapPtr) : Player::Player()
@@ -43,42 +45,4 @@ position Player::decide()
 	return position(0,0);
 }
 
-void GameMap::renderPlane()
-{
-	//strength threshold
-	int strengthVal = 10;
 
-	
-	
-
-	for(int i = 0;i<this->mapSize;i++)
-	{
-		for(int j = 0;j<this->mapSize*2;j++)
-		{
-			Entity * field = this->plane[i][j];
-			if(field == NULL)
-			{
-				cout<<".";
-				continue;
-			}
-			if(field->entityName()=="prey") 
-			{
-				// check the strenght of the prey
-				continue;
-			}
-			cout<<this->renderMap[field->entityName()];
-		}
-		cout<<endl;
-	}
-	position decision = this->playerPtr->decide();
-	this->plane[this->playerPtr->givePosition().x][this->playerPtr->givePosition().y] = NULL;
-	this->playerPtr->confirmDecision(true);
-	this->plane[this->playerPtr->givePosition().x][this->playerPtr->givePosition().y] = this->playerPtr;
-	system("CLS");
-}
-
-void GameMap::getPlayer(Player * newPlayerPtr)
-{
-	this->playerPtr = newPlayerPtr;
-	this->plane[this->playerPtr->givePosition().x][this->playerPtr->givePosition().y] = this->playerPtr;
-}
