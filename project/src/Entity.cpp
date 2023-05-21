@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include "../include/Position.h"
 #include "../include/Entity.h"
 
 using namespace std;

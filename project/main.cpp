@@ -3,6 +3,7 @@
 #include "include/Entity.h"
 #include "include/Player.h"
 #include "include/GameMap.h"
+#include "include/Wall.h"
 #include<ncurses.h>
 
 using namespace std;
@@ -15,6 +16,7 @@ int main()
 	GameMap gmap(20);
 	Player player(&gmap);		
 	gmap.getPlayer(&player);
+	gmap.initPlane();
 	while(true) gmap.renderPlane();
 	endwin();
 }
