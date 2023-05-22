@@ -9,81 +9,71 @@ class IntegerSequence{
 };
 class VectorSequence : public IntegerSequence{
 	private:
-		IntegerSequence * seq;
+		unique_ptr<IntegerSequence> seq;
 	public:
-		VectorSequence(IntegerSequence * newseq) : seq(newseq) {}
+		VectorSequence(unique_ptr<IntegerSequence> newseq) : seq(move(newseq)) {}
 		vector<int> Numbers() override
 		{
-			for(auto i : seq->Numbers())
-			{cout<<i<<" "; }
-			return seq->Numbers();
-		}
-		void other(IntegerSequence * myseq)
-		{
-			for(auto i : myseq->Numbers())
-				cout<<i<<" ";
-			cout<<endl;
+			vector<int> correctSeq = seq->Numbers();
+			for(auto i : correctSeq)
+				cout<<i<<" "; 
+			cout<<"v"<<endl;
+			return correctSeq;
 		}
 };
 class positiveSequence : public IntegerSequence{
 	private:
-		vector<int> * seq;
+		vector<int>  * seq;
 	public:
 		positiveSequence(vector<int>* newseq) : seq(newseq) {}
 		vector<int> Numbers() override
 		{
-			vector<int> correctSeq;
-			for(auto i : *seq)
-				if(i >=0) correctSeq.push_back(i);
+			vector<int> correctSeq = *seq;
+			correctSeq.erase( remove_if(correctSeq.begin(),correctSeq.end(), [](int i) {return i<0;}), correctSeq.end());
+			for(auto i : correctSeq)
+				cout<<i<<" ";
+			cout<<"p"<<endl;
 			return correctSeq;
 		}
 };
 
 class evenSequence : public IntegerSequence{
 	private:
-		vector<int> * seq;
+		unique_ptr<IntegerSequence> seq;
 	public:
-		evenSequence(vector<int> * newseq) : seq(newseq) {}
+		evenSequence(unique_ptr<IntegerSequence> newseq) : seq(move(newseq)) {}
 		vector<int> Numbers() override
 		{
-			vector<int> correctSeq;
-			for(auto i : *seq)
-				if(i%2 == 0) correctSeq.push_back(i);
+			vector<int> correctSeq = seq->Numbers();
+			correctSeq.erase( remove_if(correctSeq.begin(),correctSeq.end(), [](int i) {return i%2==1;}),correctSeq.end());
+			for(auto i : correctSeq)
+				cout<<i<<" ";
+			cout<<"e"<<endl;
 			return correctSeq;
 		}
 };
 
 class sortedSequence : public IntegerSequence{
 	private:
-		vector<int> * seq;
+		unique_ptr<IntegerSequence> seq;
 	public:
-		sortedSequence(vector<int> * newseq) : seq(newseq) {}
+		sortedSequence(unique_ptr<IntegerSequence> newseq) : seq(move(newseq)) {}
 		vector<int> Numbers() override
 		{
-			vector<int> correctSeq = *seq;
+			vector<int> correctSeq = seq->Numbers();
 			sort(correctSeq.begin(),correctSeq.end());
+			for(auto i : correctSeq)
+				cout<<i<<" ";
+			cout<<"s"<<endl;
 			return correctSeq;
 		}
 };
 
+
+
 int main()
 {
 	vector<int> a{-2,-1,7,6,5,4,3,2,1,0};
-	positiveSequence pos(&a);
-	evenSequence even(&a);
-	sortedSequence sorted(&a);
-	VectorSequence seq(&pos);
-	VectorSequence seq1(&even);
-	VectorSequence seq2(&sorted);
-	seq.Numbers();
-	cout<<"\n";
-	seq1.Numbers();
-	cout<<"\n";
-	seq2.Numbers();
-	cout<<"\n"<<"\n";
-
-	VectorSequence myseq(&even);
-	myseq.other(&pos);
-	myseq.other(&even);
-	myseq.other(&sorted);
+	unique_ptr<IntegerSequence> sth = make_unique<VectorSequence>(make_unique<sortedSequence>(make_unique<evenSequence>(make_unique<positiveSequence>(&a))));
+	sth->Numbers();
 }
