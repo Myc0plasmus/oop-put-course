@@ -15,6 +15,7 @@ class Entity{
 // maybe speed
 	public:
 		Entity(){}
+		virtual ~Entity()=default;
 		virtual string entityName()=0;
 
 		position givePosition();
