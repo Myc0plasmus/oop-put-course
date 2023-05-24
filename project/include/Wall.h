@@ -15,6 +15,6 @@ class Wall : public Entity
 		Wall(position newpos, string type);
 		Wall(position * newpos, string type);
 		string entityName() override;
-		position decide() override;
+		void decide() override;
 		
 };

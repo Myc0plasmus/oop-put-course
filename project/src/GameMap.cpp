@@ -11,7 +11,7 @@ using namespace std;
 GameMap::GameMap(int size)
 {
 	this->mapSize = size;
-	this->plane = new Entity**[size];
+	this->plane = new Entity** [size];
 	for(int i =0;i<size;i++) this->plane[i] = new Entity*[size*2];
 	for(int i=0;i<size;i++)
 	{
@@ -24,25 +24,31 @@ GameMap::GameMap(int size)
 	this->renderMap["dead"] = 'x';
 }
 
+void GameMap::moveEntity(Entity * ent)
+{
+	position start = ent->givePosition();
+	position end = ent->givePrefferedPosition();
+	plane[start.y][start.x] = NULL;
+	plane[end.y][end.x] = ent;
+}
+
 void GameMap::initPlane()
 {
 	for(int i = 0;i<this->mapSize*2;i++)
 	{
-			Wall * newWall = new Wall(0,i,"horizontalWall");
-			this->immobile.push_back(newWall);
-			this->plane[0][i] = this->immobile.back();
-			newWall = new Wall(this->mapSize-1,i,"horizontalWall");
-			this->immobile.push_back(newWall);
-			this->plane[this->mapSize-1][i] = this->immobile.back();
+			
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(0,i,"horizontalWall")));
+			this->plane[0][i]=this->immobile.back().get();
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(this->mapSize-1,i,"horizontalWall")));
+			this->plane[this->mapSize-1][i] = this->immobile.back().get();
 	}
 	for(int i =0;i<this->mapSize;i++)
 	{
-			Wall * newWall = new Wall(i,0,"verticalWall");
-			this->immobile.push_back(newWall);
-			this->plane[i][0] = this->immobile.back();
-			newWall = new Wall(i,2*this->mapSize-1,"verticalWall");
-			this->immobile.push_back(newWall);
-			this->plane[i][2*this->mapSize-1] = this->immobile.back();
+			
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,0,"verticalWall")));
+			this->plane[i][0] = this->immobile.back().get();
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,2*this->mapSize-1,"verticalWall")));
+			this->plane[i][2*this->mapSize-1] = this->immobile.back().get();
 	}
 }
 
@@ -72,23 +78,12 @@ void GameMap::renderPlane()
 			mvaddch(i,j,renderMap[field->entityName()]);
 		}
 	}
-	position decision = this->playerPtr->decide();
-	this->plane[this->playerPtr->givePosition().y][this->playerPtr->givePosition().x] = NULL;
+	this->playerPtr->decide();
+	this->moveEntity(this->playerPtr);
+	// this->plane[this->playerPtr->givePosition().y][this->playerPtr->givePosition().x] = NULL;
 	this->playerPtr->confirmDecision(true);
-	this->plane[this->playerPtr->givePosition().y][this->playerPtr->givePosition().x] = this->playerPtr;
+	// this->plane[this->playerPtr->givePosition().y][this->playerPtr->givePosition().x] = this->playerPtr;
 	refresh();
-}
-
-void GameMap::deleteGameObjects()
-{
-	for(auto obj : this->immobile)
-	{
-		if(obj->entityName() == "verticalWall" || obj->entityName() == "horizontalWall")
-		{
-			// delete obj;
-			delete static_cast<Wall*>(obj);
-		}
-	}
 }
 
 void GameMap::getPlayer(Player * newPlayerPtr)

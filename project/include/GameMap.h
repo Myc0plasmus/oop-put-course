@@ -12,8 +12,9 @@ class GameMap{
 		int mapSize;
 		map<string,char> renderMap;
 		Player * playerPtr;	
-		vector<Entity *> immobile; 	
+		vector<shared_ptr<Entity>> immobile; 	
 		Entity * getEntityOnPos(position pos);
+		void moveEntity(Entity * ent);
 
 	public:
 		const float moveFrame = 0.5;
@@ -30,6 +31,5 @@ class GameMap{
 		void refreshPlane();
 
 		//clear the memory
-		void deleteGameObjects();
 		void getPlayer(Player * newPlayerPtr);
 };

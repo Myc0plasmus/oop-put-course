@@ -8,7 +8,7 @@ using namespace std;
 Wall::Wall(string type) : name(type)
 {
 	assert(this->name == "verticalWall" || this->name == "horizontalWall");
-	this->pos = new position();
+	this->pos.reset(new position());
 	this->prefferedPos = NULL;
 }
 
@@ -35,7 +35,7 @@ string Wall::entityName()
 	return this->name;
 }
 
-position Wall::decide()
+void Wall::decide()
 {
-	return position(0,0);
+	prefferedPos.reset(NULL);
 }

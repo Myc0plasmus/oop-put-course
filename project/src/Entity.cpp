@@ -6,14 +6,30 @@ using namespace std;
 
 position Entity::givePosition()
 {
-	position temp_pos(this->pos);
-	return temp_pos;
+	return *(pos.get());
 }
+position Entity::givePrefferedPosition()
+{
+	if (prefferedPos == NULL) return *(pos.get());
+	return *(prefferedPos.get());
+}
+void Entity::prefPosApplyVector(position vec)
+		{
+			if(this->prefferedPos == NULL)
+			{
+				this->prefferedPos = make_unique<position>(this->pos->x + vec.x, this->pos->y + vec.y);
+			}
+			this->prefferedPos->x = this->pos->x + vec.x;
+			this->prefferedPos->y = this->pos->y + vec.y;
+		}
 
 void Entity::confirmDecision(bool confirmation){
-	if(!confirmation || this->prefferedPos == NULL) return;
-	delete(this->pos);
-	this->pos = new position(prefferedPos);
-	delete(this->prefferedPos);
+	if(!confirmation || this->prefferedPos == NULL) 
+	{
+		if(prefferedPos != NULL) prefferedPos.reset(NULL);
+		return;
+	}
+	this->pos.reset(this->prefferedPos.release());
 	this->prefferedPos = NULL;
 }
+

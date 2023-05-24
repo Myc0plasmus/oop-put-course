@@ -16,5 +16,5 @@ class Player : public Entity{
 		Player();
 		Player(GameMap * gameMapPtr);
 		virtual string entityName() override;
-		virtual position decide() override;
+		virtual void decide() override;
 };

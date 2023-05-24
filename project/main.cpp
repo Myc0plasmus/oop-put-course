@@ -18,6 +18,5 @@ int main()
 	gmap.getPlayer(&player);
 	gmap.initPlane();
 	while(true) gmap.renderPlane();
-	gmap.deleteGameObjects();
 	endwin();
 }

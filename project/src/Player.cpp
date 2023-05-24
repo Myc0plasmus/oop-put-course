@@ -8,7 +8,7 @@
 using namespace std;
 
 Player::Player() : name("player"){
-	this->pos = new position(15,15);
+	this->pos.reset(new position(15,15));
 	this->prefferedPos = NULL;
 	this->moveMap['w'] = position(0,-1);
 	this->moveMap['a'] = position(-1,0);
@@ -25,7 +25,7 @@ string Player::entityName() {
 	return this->name;
 }
 
-position Player::decide()
+void Player::decide()
 {
 	char ch;
 	nodelay(stdscr, TRUE);	
@@ -34,15 +34,12 @@ position Player::decide()
 	{
           if ((ch = getch()) != ERR)
 		  {
-			  delete(prefferedPos);
 			  position moveVector = this->moveMap[ch];
-			  this->prefferedPos = new position(this->pos->x + moveVector.x, this->pos->y + moveVector.y);
-			  return moveVector;
+			  prefPosApplyVector(moveVector);
+			  return;
           }
     } while(gameMap->moveFrame>=(float)(clock() - start));
-	delete(prefferedPos);
-	this->prefferedPos = NULL;
-	return position(0,0);
+	this->prefferedPos.reset(NULL);
 }
 
 
