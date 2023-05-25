@@ -10,10 +10,10 @@ class Wall : public Entity
 	private:
 		const string name;
 	public:
-		Wall(string type);
-		Wall(int x, int y, string type);
-		Wall(position newpos, string type);
-		Wall(position * newpos, string type);
+		Wall();
+		Wall(int x, int y);
+		Wall(position newpos);
+		Wall(position * newpos);
 		string entityName() override;
 		void decide() override;
 		

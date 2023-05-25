@@ -10,5 +10,14 @@ typedef struct position{
 		x = newpos->x;
 		y = newpos->y;
 	}
+	inline bool operator==( const position& rhs)
+	{
+		if(this->x == rhs.x && this->y == rhs.y) return true;
+		return false;
+	}
+	inline bool operator!=(const position& rhs)
+	{
+		return !(*this == rhs);
+	}
 
 }position;

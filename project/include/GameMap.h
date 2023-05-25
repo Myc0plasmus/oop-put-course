@@ -13,13 +13,20 @@ class GameMap{
 		map<string,char> renderMap;
 		Player * playerPtr;	
 		vector<shared_ptr<Entity>> immobile; 	
-		Entity * getEntityOnPos(position pos);
+		vector<shared_ptr<Entity>> mobile;
 		void moveEntity(Entity * ent);
+		void assignEntityOnPos(Entity * entity,position pos);
+		void assignEntityOnCoords(Entity * entity,int x, int y);
+		
 
 	public:
 		const float moveFrame = 0.5;
 		Entity *** plane;
 		GameMap(int size);
+
+
+		Entity * getEntityOnPos(position pos);
+		Entity * getEntityOnCoords(int x, int y);
 
 		//map generation
 		void initPlane();

@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #include<ncurses.h>
 #include "../include/GameMap.h"
+#include "../include/Position.h"
 #include "../include/Entity.h"
 #include "../include/Player.h"
 #include "../include/Wall.h"
@@ -8,7 +9,7 @@
 
 using namespace std;
 
-GameMap::GameMap(int size)
+GameMap::GameMap(int size) 
 {
 	this->mapSize = size;
 	this->plane = new Entity** [size];
@@ -19,9 +20,31 @@ GameMap::GameMap(int size)
 	}
 	this->renderMap["verticalWall"] = '|';	
 	this->renderMap["horizontalWall"] = '_';	
+	this->renderMap["Wall"] = '#';	
 	this->renderMap["player"] = 'p';	
 	this->renderMap["prey"] = 'o';
 	this->renderMap["dead"] = 'x';
+	 
+}
+
+Entity * GameMap::getEntityOnPos(position pos)
+{
+	return this->plane[pos.y][pos.x];
+}
+
+Entity * GameMap::getEntityOnCoords(int x, int y)
+{
+	return this->plane[y][x];
+}
+
+void GameMap::assignEntityOnPos(Entity * entity, position pos)
+{
+	this->plane[pos.y][pos.x] = entity;
+}
+
+void GameMap::assignEntityOnCoords(Entity * entity, int x, int y)
+{
+	this->plane[y][x] = entity;
 }
 
 void GameMap::moveEntity(Entity * ent)
@@ -32,22 +55,24 @@ void GameMap::moveEntity(Entity * ent)
 	plane[end.y][end.x] = ent;
 }
 
+
+
 void GameMap::initPlane()
 {
 	for(int i = 0;i<this->mapSize*2;i++)
 	{
 			
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(0,i,"horizontalWall")));
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(0,i)));
 			this->plane[0][i]=this->immobile.back().get();
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(this->mapSize-1,i,"horizontalWall")));
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(this->mapSize-1,i)));
 			this->plane[this->mapSize-1][i] = this->immobile.back().get();
 	}
 	for(int i =0;i<this->mapSize;i++)
 	{
 			
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,0,"verticalWall")));
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,0)));
 			this->plane[i][0] = this->immobile.back().get();
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,2*this->mapSize-1,"verticalWall")));
+			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,2*this->mapSize-1)));
 			this->plane[i][2*this->mapSize-1] = this->immobile.back().get();
 	}
 }
@@ -78,17 +103,23 @@ void GameMap::renderPlane()
 			mvaddch(i,j,renderMap[field->entityName()]);
 		}
 	}
-	this->playerPtr->decide();
-	this->moveEntity(this->playerPtr);
-	// this->plane[this->playerPtr->givePosition().y][this->playerPtr->givePosition().x] = NULL;
-	this->playerPtr->confirmDecision(true);
-	// this->plane[this->playerPtr->givePosition().y][this->playerPtr->givePosition().x] = this->playerPtr;
+	for(auto entity : mobile)
+	{
+		entity->decide();
+		Entity * entityOnPrefferedPos = this->getEntityOnPos(entity->givePrefferedPosition());
+		if(entity->givePrefferedPosition() != entity->givePosition() && (entityOnPrefferedPos == NULL || (entityOnPrefferedPos != NULL && entityOnPrefferedPos->entityName() != "Wall")) )
+		{
+			this->moveEntity(entity.get());
+			entity->confirmDecision(true);
+		}
+	}
 	refresh();
 }
 
 void GameMap::getPlayer(Player * newPlayerPtr)
 {
 	this->playerPtr = newPlayerPtr;
+	mobile.push_back(shared_ptr<Entity>(this->playerPtr));
 	this->plane[this->playerPtr->givePosition().x][this->playerPtr->givePosition().y] = this->playerPtr;
 }
 
