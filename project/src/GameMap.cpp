@@ -53,6 +53,13 @@ void GameMap::moveEntity(Entity * ent)
 	position end = ent->givePrefferedPosition();
 	plane[start.y][start.x] = NULL;
 	plane[end.y][end.x] = ent;
+	mvaddch(start.y,start.x,'.');
+	if(ent->entityName()=="prey") 
+			{
+				// check the strenght of the prey
+				return;
+			}
+	mvaddch(end.y,end.x,renderMap[ent->entityName()]);
 }
 
 
@@ -103,17 +110,23 @@ void GameMap::renderPlane()
 			mvaddch(i,j,renderMap[field->entityName()]);
 		}
 	}
-	for(auto entity : mobile)
-	{
-		entity->decide();
-		Entity * entityOnPrefferedPos = this->getEntityOnPos(entity->givePrefferedPosition());
-		if(entity->givePrefferedPosition() != entity->givePosition() && (entityOnPrefferedPos == NULL || (entityOnPrefferedPos != NULL && entityOnPrefferedPos->entityName() != "Wall")) )
-		{
-			this->moveEntity(entity.get());
-			entity->confirmDecision(true);
-		}
-	}
+	
 	refresh();
+}
+
+void GameMap::refreshPlane()
+{
+	for(auto entity : mobile)
+		{
+			entity->decide();
+			Entity * entityOnPrefferedPos = this->getEntityOnPos(entity->givePrefferedPosition());
+			if(entity->givePrefferedPosition() != entity->givePosition() && (entityOnPrefferedPos == NULL || (entityOnPrefferedPos != NULL && entityOnPrefferedPos->entityName() != "Wall")) )
+			{
+				this->moveEntity(entity.get());
+				entity->confirmDecision(true);
+				refresh();
+			}
+		}
 }
 
 void GameMap::getPlayer(Player * newPlayerPtr)

@@ -17,6 +17,7 @@ int main()
 	Player player(&gmap);		
 	gmap.getPlayer(&player);
 	gmap.initPlane();
-	while(true) gmap.renderPlane();
+	gmap.renderPlane();
+	while(true) gmap.refreshPlane();
 	endwin();
 }
