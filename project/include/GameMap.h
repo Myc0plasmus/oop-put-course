@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Wall.h"
+#include "GenerationParams.h"
 
 class Player;
 
@@ -12,17 +13,27 @@ class GameMap{
 		int mapSize;
 		map<string,char> renderMap;
 		Player * playerPtr;	
-		vector<shared_ptr<Entity>> immobile; 	
+		unique_ptr<Wall>primalWall;
 		vector<shared_ptr<Entity>> mobile;
 		void moveEntity(Entity * ent);
 		void assignEntityOnPos(Entity * entity,position pos);
 		void assignEntityOnCoords(Entity * entity,int x, int y);
+
+		// cellular automata params;
+		int fillprob;
+		int size_x;
+		int size_y;
+		unique_ptr<generation_params[]> params_set;		
+		int generations;
+		void randpick();
+		void CellularAutomataGenerator();
 		
 
 	public:
 		const float moveFrame = 0.5;
 		Entity *** plane;
 		GameMap(int size);
+		GameMap(int size, int nfillprob, int ngen, generation_params* nparams_set );
 
 
 		Entity * getEntityOnPos(position pos);

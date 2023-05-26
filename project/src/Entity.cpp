@@ -14,14 +14,14 @@ position Entity::givePrefferedPosition()
 	return *(prefferedPos.get());
 }
 void Entity::prefPosApplyVector(position vec)
-		{
-			if(this->prefferedPos == NULL)
-			{
-				this->prefferedPos = make_unique<position>(this->pos->x + vec.x, this->pos->y + vec.y);
-			}
-			this->prefferedPos->x = this->pos->x + vec.x;
-			this->prefferedPos->y = this->pos->y + vec.y;
-		}
+{
+	if(this->prefferedPos == NULL)
+	{
+		this->prefferedPos = make_unique<position>(this->pos->x + vec.x, this->pos->y + vec.y);
+	}
+	this->prefferedPos->x = this->pos->x + vec.x;
+	this->prefferedPos->y = this->pos->y + vec.y;
+}
 
 void Entity::confirmDecision(bool confirmation){
 	if(!confirmation || this->prefferedPos == NULL) 

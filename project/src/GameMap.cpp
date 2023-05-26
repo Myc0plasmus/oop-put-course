@@ -18,13 +18,29 @@ GameMap::GameMap(int size)
 	{
 		for(int j =0;j<size*2;j++) this->plane[i][j] = NULL;
 	}
+	this->primalWall = make_unique<Wall>();
 	this->renderMap["verticalWall"] = '|';	
 	this->renderMap["horizontalWall"] = '_';	
 	this->renderMap["Wall"] = '#';	
 	this->renderMap["player"] = 'p';	
 	this->renderMap["prey"] = 'o';
 	this->renderMap["dead"] = 'x';
-	 
+
+	//map generation
+	this->fillprob = 40;
+	this->size_x = 2*size;
+	this->size_y = size;
+	this->generations = 1;
+	this->params_set = unique_ptr<generation_params[]>(new generation_params[1]);
+	this->params_set[0].reps = 5;
+	this->params_set[0].r1_cutoff = 5;
+	this->params_set[0].r2_cutoff = 2;
+}
+GameMap::GameMap(int size, int nfillprob, int ngen, generation_params * nparams_set) : GameMap::GameMap(size)
+{
+	this->fillprob = nfillprob;
+	this->generations = ngen;
+	this->params_set.reset(nparams_set);
 }
 
 Entity * GameMap::getEntityOnPos(position pos)
@@ -63,24 +79,20 @@ void GameMap::moveEntity(Entity * ent)
 }
 
 
-
 void GameMap::initPlane()
 {
 	for(int i = 0;i<this->mapSize*2;i++)
 	{
 			
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(0,i)));
-			this->plane[0][i]=this->immobile.back().get();
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(this->mapSize-1,i)));
-			this->plane[this->mapSize-1][i] = this->immobile.back().get();
+			// this->immobile.push_back(shared_ptr<Entity>(new Wall(0,i)));
+			this->plane[0][i]=this->primalWall.get();
+			this->plane[this->mapSize-1][i] = this->primalWall.get();
 	}
 	for(int i =0;i<this->mapSize;i++)
 	{
 			
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,0)));
-			this->plane[i][0] = this->immobile.back().get();
-			this->immobile.push_back(shared_ptr<Entity>(new Wall(i,2*this->mapSize-1)));
-			this->plane[i][2*this->mapSize-1] = this->immobile.back().get();
+			this->plane[i][0] = this->primalWall.get();
+			this->plane[i][2*this->mapSize-1] = this->primalWall.get();
 	}
 }
 
