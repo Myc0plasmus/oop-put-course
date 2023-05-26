@@ -14,10 +14,11 @@ class GameMap{
 		map<string,char> renderMap;
 		Player * playerPtr;	
 		unique_ptr<Wall>primalWall;
-		vector<shared_ptr<Entity>> mobile;
+		vector<Entity *> mobile;
 		void moveEntity(Entity * ent);
 		void assignEntityOnPos(Entity * entity,position pos);
 		void assignEntityOnCoords(Entity * entity,int x, int y);
+		void setSpawnPoint(Entity * entity);
 
 		// cellular automata params;
 		int fillprob;
@@ -25,8 +26,8 @@ class GameMap{
 		int size_y;
 		unique_ptr<generation_params[]> params_set;		
 		int generations;
-		void randpick();
-		void CellularAutomataGenerator();
+		Entity * randpick();
+		void CellularAutomataGenerator(generation_params * params);
 		
 
 	public:
@@ -34,10 +35,11 @@ class GameMap{
 		Entity *** plane;
 		GameMap(int size);
 		GameMap(int size, int nfillprob, int ngen, generation_params* nparams_set );
-
+		~GameMap();
 
 		Entity * getEntityOnPos(position pos);
 		Entity * getEntityOnCoords(int x, int y);
+		void setEntitySpawnPoint(position * pos);
 
 		//map generation
 		void initPlane();
@@ -49,5 +51,10 @@ class GameMap{
 		void refreshPlane();
 
 		//clear the memory
-		void getPlayer(Player * newPlayerPtr);
+		void wipeEnitities();
+
+		//spawns player and assigns it to playerPtr
+		 void spawnPlayer(Player * newPlayerPtr);
+
+
 };

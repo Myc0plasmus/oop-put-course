@@ -1,11 +1,13 @@
 #include<bits/stdc++.h>
 #include "../include/Position.h"
 #include "../include/Entity.h"
+#include "../include/GameMap.h"
 
 using namespace std;
 
 position Entity::givePosition()
 {
+	if(this->pos == NULL) this->pos=make_unique<position>(0,0);
 	return *(pos.get());
 }
 position Entity::givePrefferedPosition()
@@ -32,4 +34,5 @@ void Entity::confirmDecision(bool confirmation){
 	this->pos.reset(this->prefferedPos.release());
 	this->prefferedPos = NULL;
 }
+
 

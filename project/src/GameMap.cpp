@@ -12,12 +12,7 @@ using namespace std;
 GameMap::GameMap(int size) 
 {
 	this->mapSize = size;
-	this->plane = new Entity** [size];
-	for(int i =0;i<size;i++) this->plane[i] = new Entity*[size*2];
-	for(int i=0;i<size;i++)
-	{
-		for(int j =0;j<size*2;j++) this->plane[i][j] = NULL;
-	}
+	
 	this->primalWall = make_unique<Wall>();
 	this->renderMap["verticalWall"] = '|';	
 	this->renderMap["horizontalWall"] = '_';	
@@ -35,12 +30,37 @@ GameMap::GameMap(int size)
 	this->params_set[0].reps = 5;
 	this->params_set[0].r1_cutoff = 5;
 	this->params_set[0].r2_cutoff = 2;
+
+	//plane initialization
+	this->plane = new Entity** [size_y];
+	for(int i =0;i<size_y;i++) this->plane[i] = new Entity*[size_x];
+	for(int i=0;i<size_y;i++)
+	{
+		for(int j =0;j<size_x;j++) this->plane[i][j] = NULL;
+	}
 }
+
 GameMap::GameMap(int size, int nfillprob, int ngen, generation_params * nparams_set) : GameMap::GameMap(size)
 {
 	this->fillprob = nfillprob;
 	this->generations = ngen;
 	this->params_set.reset(nparams_set);
+}
+
+GameMap::~GameMap()
+{
+	for(int i =0;i<size_y;i++) delete[] this->plane[i];
+	delete [] this->plane;
+	for(auto entity : mobile) delete(entity);
+}
+
+void GameMap::setEntitySpawnPoint(position * pos)
+{
+	while(this->getEntityOnPos(*pos) != NULL)
+	{
+		pos->x = rand() % this->size_x;
+		pos->y = rand() % this->size_y;
+	}
 }
 
 Entity * GameMap::getEntityOnPos(position pos)
@@ -79,21 +99,83 @@ void GameMap::moveEntity(Entity * ent)
 }
 
 
+Entity * GameMap::randpick(void)
+{
+	if(rand()%100 < this->fillprob)
+		return this->primalWall.get();
+	else
+		return NULL;
+}
+
+
+ void GameMap::CellularAutomataGenerator(generation_params * params)
+ {
+	Entity *** plane2 = new Entity** [size_y];
+	for(int i =0;i<size_y;i++) plane2[i] = new Entity*[size_x];
+	for(int i=0;i<size_y;i++)
+		for(int j =0;j<size_x;j++) plane2[i][j] = primalWall.get();
+	
+	int xi, yi, ii, jj;
+	
+	for(yi=1; yi<size_y-1; yi++)
+	for(xi=1; xi<size_x-1; xi++)
+ 	{
+ 		int adjcount_r1 = 0,
+ 		    adjcount_r2 = 0;
+ 		
+ 		for(ii=-1; ii<=1; ii++)
+		for(jj=-1; jj<=1; jj++)
+ 		{
+ 			if(plane[yi+ii][xi+jj] != NULL)
+ 				adjcount_r1++;
+ 		}
+ 		for(ii=yi-2; ii<=yi+2; ii++)
+ 		for(jj=xi-2; jj<=xi+2; jj++)
+ 		{
+ 			if(abs(ii-yi)==2 && abs(jj-xi)==2)
+ 				continue;
+ 			if(ii<0 || jj<0 || ii>=size_y || jj>=size_x)
+ 				continue;
+ 			if(plane[ii][jj] != NULL)
+ 				adjcount_r2++;
+ 		}
+ 		if(adjcount_r1 >= params->r1_cutoff || adjcount_r2 <= params->r2_cutoff)
+ 			plane2[yi][xi] = this->primalWall.get();
+ 		else
+ 			plane2[yi][xi] = NULL;
+ 	}
+ 	for(yi=1; yi<size_y-1; yi++)
+ 	for(xi=1; xi<size_x-1; xi++)
+ 		plane[yi][xi] = plane2[yi][xi];
+
+	for(int i =0;i<size_y;i++) delete[] plane2[i];
+	delete [] plane2;
+ } 
+
 void GameMap::initPlane()
 {
-	for(int i = 0;i<this->mapSize*2;i++)
-	{
+	for(int yi = 0;yi<this->size_y;yi++)
+		for(int xi = 0;xi<this->size_x;xi++)
+			plane[yi][xi] = this->randpick();
+
+	for(int i = 0;i<this->size_x;i++)
+		this->plane[0][i] = this->plane[this->size_y-1][i] = this->primalWall.get();
+	
+	// this->immobile.push_back(shared_ptr<Entity>(new Wall(0,i)));
 			
-			// this->immobile.push_back(shared_ptr<Entity>(new Wall(0,i)));
-			this->plane[0][i]=this->primalWall.get();
-			this->plane[this->mapSize-1][i] = this->primalWall.get();
-	}
-	for(int i =0;i<this->mapSize;i++)
+	for(int i =0;i<this->size_y;i++)
+			this->plane[i][0] =	this->plane[i][this->size_x-1] = this->primalWall.get();
+	
+	for(int generation = 0;generation<this->generations;generation++)
 	{
-			
-			this->plane[i][0] = this->primalWall.get();
-			this->plane[i][2*this->mapSize-1] = this->primalWall.get();
+		for(int i =0;i<this->params_set[generation].reps;i++)
+		{
+			this->CellularAutomataGenerator(this->params_set.get()+generation);
+		}
 	}
+
+
+	
 }
 
 void GameMap::renderPlane()
@@ -134,18 +216,19 @@ void GameMap::refreshPlane()
 			Entity * entityOnPrefferedPos = this->getEntityOnPos(entity->givePrefferedPosition());
 			if(entity->givePrefferedPosition() != entity->givePosition() && (entityOnPrefferedPos == NULL || (entityOnPrefferedPos != NULL && entityOnPrefferedPos->entityName() != "Wall")) )
 			{
-				this->moveEntity(entity.get());
+				this->moveEntity(entity);
 				entity->confirmDecision(true);
 				refresh();
 			}
 		}
 }
 
-void GameMap::getPlayer(Player * newPlayerPtr)
+void GameMap::spawnPlayer(Player * newPlayerPtr)
 {
 	this->playerPtr = newPlayerPtr;
-	mobile.push_back(shared_ptr<Entity>(this->playerPtr));
-	this->plane[this->playerPtr->givePosition().x][this->playerPtr->givePosition().y] = this->playerPtr;
+	mobile.push_back(this->playerPtr);
+	this->playerPtr->setSpawnPoint();
+	this->assignEntityOnPos(playerPtr, playerPtr->givePosition());
 }
 
 

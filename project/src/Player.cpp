@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Player::Player() : name("player"){
+Player::Player() : name("player"), gameOver(false){
 	this->pos.reset(new position(15,15));
 	this->prefferedPos = NULL;
 	this->moveMap['w'] = position(0,-1);
@@ -32,14 +32,31 @@ void Player::decide()
 	clock_t start = clock();
 	do 
 	{
-          if ((ch = getch()) != ERR)
-		  {
-			  position moveVector = this->moveMap[ch];
-			  prefPosApplyVector(moveVector);
-			  return;
-          }
+		if(this->gameOver) continue;	
+		if ((ch = getch()) != ERR)
+		{
+			if(ch == ':')
+			{
+				this->gameOver = true;
+				continue;
+			}
+			position moveVector = this->moveMap[ch];
+			prefPosApplyVector(moveVector);
+			return;
+		}
     } while(gameMap->moveFrame>=(float)(clock() - start));
 	this->prefferedPos.reset(NULL);
 }
+
+bool Player::isGameOver()
+{
+	return this->gameOver;
+}
+
+void Player::setSpawnPoint()
+{
+	this->gameMap->setEntitySpawnPoint(this->pos.get());
+}
+
 
 

@@ -10,14 +10,15 @@ using namespace std;
 
 int main()
 {
+	srand(time(0));
 	initscr();
 	curs_set(0);
 	noecho();
-	GameMap gmap(20);
-	Player player(&gmap);		
-	gmap.getPlayer(&player);
+	GameMap gmap(40);
+	Player * player = new Player(&gmap);		
 	gmap.initPlane();
+	gmap.spawnPlayer(player);
 	gmap.renderPlane();
-	while(true) gmap.refreshPlane();
+	while(!player->isGameOver()) gmap.refreshPlane();
 	endwin();
 }
