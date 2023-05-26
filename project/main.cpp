@@ -4,6 +4,7 @@
 #include "include/Player.h"
 #include "include/GameMap.h"
 #include "include/Wall.h"
+#include "include/Prey.h"
 #include<ncurses.h>
 
 using namespace std;
@@ -18,6 +19,7 @@ int main()
 	Player * player = new Player(&gmap);		
 	gmap.initPlane();
 	gmap.spawnPlayer(player);
+	gmap.spawnPrey(5);
 	gmap.renderPlane();
 	while(!player->isGameOver()) gmap.refreshPlane();
 	endwin();

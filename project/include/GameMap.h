@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Wall.h"
 #include "GenerationParams.h"
+#include "Prey.h"
 
 class Player;
 
@@ -54,7 +55,10 @@ class GameMap{
 		void wipeEnitities();
 
 		//spawns player and assigns it to playerPtr
-		 void spawnPlayer(Player * newPlayerPtr);
+		void spawnPlayer(Player * newPlayerPtr);
+
+		//spawns prey!!!
+		void spawnPrey(int numOfPrey);  
 
 
 };

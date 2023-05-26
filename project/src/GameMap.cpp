@@ -5,6 +5,7 @@
 #include "../include/Entity.h"
 #include "../include/Player.h"
 #include "../include/Wall.h"
+#include "../include/Prey.h"
 
 
 using namespace std;
@@ -90,11 +91,11 @@ void GameMap::moveEntity(Entity * ent)
 	plane[start.y][start.x] = NULL;
 	plane[end.y][end.x] = ent;
 	mvaddch(start.y,start.x,'.');
-	if(ent->entityName()=="prey") 
-			{
-				// check the strenght of the prey
-				return;
-			}
+	// if(ent->entityName()=="prey") 
+	// {
+	// 	// check the strenght of the prey
+	// 	return;
+	// }
 	mvaddch(end.y,end.x,renderMap[ent->entityName()]);
 }
 
@@ -196,11 +197,11 @@ void GameMap::renderPlane()
 				mvaddch(i,j,'.');
 				continue;
 			}
-			if(field->entityName()=="prey") 
-			{
-				// check the strenght of the prey
-				continue;
-			}
+			// if(field->entityName()=="prey") 
+			// {
+			// 	// check the strenght of the prey
+			// 	continue;
+			// }
 			mvaddch(i,j,renderMap[field->entityName()]);
 		}
 	}
@@ -214,7 +215,9 @@ void GameMap::refreshPlane()
 		{
 			entity->decide();
 			Entity * entityOnPrefferedPos = this->getEntityOnPos(entity->givePrefferedPosition());
-			if(entity->givePrefferedPosition() != entity->givePosition() && (entityOnPrefferedPos == NULL || (entityOnPrefferedPos != NULL && entityOnPrefferedPos->entityName() != "Wall")) )
+			if(entity->givePrefferedPosition() != entity->givePosition() && (entityOnPrefferedPos == NULL 
+						//|| (entityOnPrefferedPos != NULL && entityOnPrefferedPos->entityName() != "Wall")
+						) )
 			{
 				this->moveEntity(entity);
 				entity->confirmDecision(true);
@@ -229,6 +232,17 @@ void GameMap::spawnPlayer(Player * newPlayerPtr)
 	mobile.push_back(this->playerPtr);
 	this->playerPtr->setSpawnPoint();
 	this->assignEntityOnPos(playerPtr, playerPtr->givePosition());
+}
+
+void GameMap::spawnPrey(int numOfPrey)
+{
+	for(int i =0;i<numOfPrey;i++)
+	{
+		Prey * newPrey = new Prey(this);
+		this->mobile.push_back(newPrey);
+		newPrey->setSpawnPoint();
+		this->assignEntityOnPos(newPrey, newPrey->givePosition());
+	}
 }
 
 
