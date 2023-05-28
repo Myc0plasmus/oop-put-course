@@ -6,6 +6,7 @@
 #include "entities/Wall.h"
 #include "structs/GenerationParams.h"
 #include "entities/Prey.h"
+#include "entities/Corpse.h"
 
 class Player;
 
@@ -15,6 +16,7 @@ class GameMap{
 		map<string,char> renderMap;
 		Player * playerPtr;	
 		unique_ptr<Wall>primalWall;
+		unique_ptr<Corpse> primalCorpse;
 		vector<Entity *> mobile;
 		void moveEntity(Entity * ent);
 		void assignEntityOnPos(Entity * entity,position pos);
@@ -41,6 +43,7 @@ class GameMap{
 		Entity * getEntityOnPos(position pos);
 		Entity * getEntityOnCoords(int x, int y);
 		void setEntitySpawnPoint(position * pos);
+		position generateEntitySpawnPoint();
 
 		//map generation
 		void initPlane();
@@ -59,6 +62,9 @@ class GameMap{
 
 		//spawns prey!!!
 		void spawnPrey(int numOfPrey);  
+
+		// for debug purposes
+		void spawnCorpses(int numOfCorpses);
 
 
 };

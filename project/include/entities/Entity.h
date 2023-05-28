@@ -27,6 +27,8 @@ class Entity{
 		//method that is supposed to return the changes to entity's coordinates, that will be applied in form of a mathematical vector
 		virtual void decide()=0;
 		void confirmDecision(bool confirmation);
+		void stepOnSomething(Entity * entity);
+		Entity * stepOffSomething();
 		virtual void setSpawnPoint(){}
 };
 

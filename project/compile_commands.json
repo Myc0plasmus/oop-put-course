@@ -1,37 +1,43 @@
 [
 {
   "directory": "/home/anomalokaris/Documents/C/oop-put-course/project/build",
-  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++17 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/main.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/main.cpp",
+  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++20 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/main.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/main.cpp",
   "file": "/home/anomalokaris/Documents/C/oop-put-course/project/src/main.cpp",
   "output": "CMakeFiles/main.dir/src/main.cpp.o"
 },
 {
   "directory": "/home/anomalokaris/Documents/C/oop-put-course/project/build",
-  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++17 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/GameMap.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/GameMap.cpp",
+  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++20 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/GameMap.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/GameMap.cpp",
   "file": "/home/anomalokaris/Documents/C/oop-put-course/project/src/GameMap.cpp",
   "output": "CMakeFiles/main.dir/src/GameMap.cpp.o"
 },
 {
   "directory": "/home/anomalokaris/Documents/C/oop-put-course/project/build",
-  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++17 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Entity.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Entity.cpp",
+  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++20 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Corpse.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Corpse.cpp",
+  "file": "/home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Corpse.cpp",
+  "output": "CMakeFiles/main.dir/src/entities/Corpse.cpp.o"
+},
+{
+  "directory": "/home/anomalokaris/Documents/C/oop-put-course/project/build",
+  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++20 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Entity.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Entity.cpp",
   "file": "/home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Entity.cpp",
   "output": "CMakeFiles/main.dir/src/entities/Entity.cpp.o"
 },
 {
   "directory": "/home/anomalokaris/Documents/C/oop-put-course/project/build",
-  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++17 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Player.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Player.cpp",
+  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++20 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Player.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Player.cpp",
   "file": "/home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Player.cpp",
   "output": "CMakeFiles/main.dir/src/entities/Player.cpp.o"
 },
 {
   "directory": "/home/anomalokaris/Documents/C/oop-put-course/project/build",
-  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++17 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Prey.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Prey.cpp",
+  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++20 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Prey.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Prey.cpp",
   "file": "/home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Prey.cpp",
   "output": "CMakeFiles/main.dir/src/entities/Prey.cpp.o"
 },
 {
   "directory": "/home/anomalokaris/Documents/C/oop-put-course/project/build",
-  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++17 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Wall.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Wall.cpp",
+  "command": "/usr/bin/c++  -I/home/anomalokaris/Documents/C/oop-put-course/project/include -std=gnu++20 -g -Wall -Wextra -Wshadow -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o CMakeFiles/main.dir/src/entities/Wall.cpp.o -c /home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Wall.cpp",
   "file": "/home/anomalokaris/Documents/C/oop-put-course/project/src/entities/Wall.cpp",
   "output": "CMakeFiles/main.dir/src/entities/Wall.cpp.o"
 }

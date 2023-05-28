@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include <curses.h>
 #include<ncurses.h>
 #include "GameMap.h"
 #include "structs/Position.h"
@@ -6,6 +7,7 @@
 #include "entities/Player.h"
 #include "entities/Wall.h"
 #include "entities/Prey.h"
+#include "entities/Corpse.h"
 
 
 using namespace std;
@@ -15,6 +17,7 @@ GameMap::GameMap(int size)
 	this->mapSize = size;
 	
 	this->primalWall = make_unique<Wall>();
+	this->primalCorpse = make_unique<Corpse>();
 	this->renderMap["verticalWall"] = '|';	
 	this->renderMap["horizontalWall"] = '_';	
 	this->renderMap["Wall"] = '#';	
@@ -64,6 +67,17 @@ void GameMap::setEntitySpawnPoint(position * pos)
 	}
 }
 
+position GameMap::generateEntitySpawnPoint()
+{
+	position newSpawnPoint(0,0); 
+	while(this->getEntityOnPos(newSpawnPoint) != NULL)
+	{
+		newSpawnPoint.x = rand() % this->size_x;
+		newSpawnPoint.y = rand() % this->size_y;
+	}
+	return newSpawnPoint;
+}
+
 Entity * GameMap::getEntityOnPos(position pos)
 {
 	return this->plane[pos.y][pos.x];
@@ -88,9 +102,10 @@ void GameMap::moveEntity(Entity * ent)
 {
 	position start = ent->givePosition();
 	position end = ent->givePrefferedPosition();
-	plane[start.y][start.x] = NULL;
-	plane[end.y][end.x] = ent;
-	mvaddch(start.y,start.x,'.');
+	this->plane[start.y][start.x] = ent->stepOffSomething();
+	ent->stepOnSomething(this->getEntityOnPos(end));
+	this->plane[end.y][end.x] = ent;
+	mvaddch(start.y,start.x,(this->getEntityOnPos(start) == NULL)?'.':this->renderMap[this->getEntityOnPos(start)->entityName()]);
 	// if(ent->entityName()=="prey") 
 	// {
 	// 	// check the strenght of the prey
@@ -216,7 +231,7 @@ void GameMap::refreshPlane()
 			entity->decide();
 			Entity * entityOnPrefferedPos = this->getEntityOnPos(entity->givePrefferedPosition());
 			if(entity->givePrefferedPosition() != entity->givePosition() && (entityOnPrefferedPos == NULL 
-						//|| (entityOnPrefferedPos != NULL && entityOnPrefferedPos->entityName() != "Wall")
+						|| entityOnPrefferedPos->entityName() == "corpse"
 						) )
 			{
 				this->moveEntity(entity);
@@ -243,6 +258,12 @@ void GameMap::spawnPrey(int numOfPrey)
 		newPrey->setSpawnPoint();
 		this->assignEntityOnPos(newPrey, newPrey->givePosition());
 	}
+}
+
+void GameMap::spawnCorpses(int numOfCorpses)
+{
+	for(int i =0;i<numOfCorpses;i++)
+		this->assignEntityOnPos(this->primalCorpse.get(),this->generateEntitySpawnPoint());
 }
 
 

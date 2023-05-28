@@ -13,6 +13,7 @@ Prey::Prey(GameMap * gameMapPtr)
 	this->name = "prey";
 	this->pos = make_unique<position>(0,0);
 	this->prefferedPos = NULL;
+	this->standsOn = NULL;
 	this->gameMap = gameMapPtr;	
 }
 

@@ -11,6 +11,7 @@ Player::Player() : gameOver(false){
 	this->name = "player";
 	this->pos.reset(new position(15,15));
 	this->prefferedPos = NULL;
+	this->standsOn = NULL;
 	this->moveMap['w'] = position(0,-1);
 	this->moveMap['a'] = position(-1,0);
 	this->moveMap['d'] = position(1,0);

@@ -39,3 +39,16 @@ string Entity::entityName()
 {
 	return this->name;
 }
+
+void Entity::stepOnSomething(Entity * entity)
+{
+	if(entity == NULL) return;
+	this->standsOn = entity;
+}
+
+Entity * Entity::stepOffSomething()
+{
+	Entity * res = this->standsOn;
+	if(this->standsOn != NULL) this->standsOn = NULL;
+	return res;
+}
