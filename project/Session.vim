@@ -13,16 +13,16 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 src/Player.cpp
+badd +21 src/Player.cpp
 badd +1 term:///data/programowanie/oop-put-course/project//4450:/usr/bin/zsh
-badd +1 include/Player.h
-badd +1 src/Entity.cpp
-badd +1 include/Entity.h
+badd +21 include/Player.h
+badd +4 src/Entity.cpp
+badd +29 include/Entity.h
 badd +10072 term:///data/programowanie/oop-put-course/project//4588:/usr/bin/zsh
 badd +1 term:///data/programowanie/oop-put-course/project//6269:/usr/bin/zsh
-badd +77 src/GameMap.cpp
-badd +21 main.cpp
-badd +33 include/GameMap.h
+badd +243 src/GameMap.cpp
+badd +22 main.cpp
+badd +45 include/GameMap.h
 badd +13 include/Position.h
 badd +1 include/Wall.h
 badd +40 src/Wall.cpp
@@ -33,11 +33,22 @@ badd +20 term://~/Documents/C/oop-put-course/project//2670:/usr/bin/zsh
 badd +16 term://~/.local/share/nvim/site/pack/packer/start/coq_nvim//2905:/usr/bin/python3
 badd +54 term://~/.local/share/nvim/site/pack/packer/start/coq_nvim//3138:/usr/bin/python3
 badd +20 term://~/Documents/C/oop-put-course/project//3416:/usr/bin/zsh
-badd +1 term://~/Documents/C/oop-put-course/project//3883:/usr/bin/zsh
+badd +26 term://~/Documents/C/oop-put-course/project//3883:/usr/bin/zsh
 badd +58 term://~/.local/share/nvim/site/pack/packer/start/coq_nvim//7266:/usr/bin/python3
+badd +9 include/GenerationParams.h
+badd +2 term://~/Documents/C/oop-put-course/project//12796:/usr/bin/zsh
+badd +591 term://~/Documents/C/oop-put-course/project//12982:/usr/bin/zsh
+badd +72 term://~/Documents/C/oop-put-course/project//36518:/usr/bin/zsh
+badd +72 term://~/Documents/C/oop-put-course/project//37094:/usr/bin/zsh
+badd +64 term://~/Documents/C/oop-put-course/project//37445:/usr/bin/zsh
+badd +16 include/Prey.h
+badd +26 src/Prey.cpp
+badd +26 term://~/Documents/C/oop-put-course/project//50119:/usr/bin/zsh
+badd +0 term://~/Documents/C/oop-put-course/project//55268:/usr/bin/zsh
 argglobal
 %argdel
 set stal=2
+tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
@@ -64,11 +75,11 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe '2resize ' . ((&lines * 23 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
-exe '3resize ' . ((&lines * 26 + 26) / 53)
-exe 'vert 3resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 35 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
+exe '3resize ' . ((&lines * 36 + 37) / 75)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -80,12 +91,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 12 - ((8 * winheight(0) + 25) / 50)
+let s:l = 10 - ((9 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 029|
+keepjumps 10
+normal! 049|
 wincmd w
 argglobal
 if bufexists(fnamemodify("term://~/Documents/C/oop-put-course/project//98940:/usr/bin/zsh", ":p")) | buffer term://~/Documents/C/oop-put-course/project//98940:/usr/bin/zsh | else | edit term://~/Documents/C/oop-put-course/project//98940:/usr/bin/zsh | endif
@@ -101,7 +112,7 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 11) / 23)
+let s:l = 1 - ((0 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -124,18 +135,18 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 12 - ((0 * winheight(0) + 13) / 26)
+let s:l = 3 - ((2 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 010|
+keepjumps 3
+normal! 020|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe '2resize ' . ((&lines * 23 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
-exe '3resize ' . ((&lines * 26 + 26) / 53)
-exe 'vert 3resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 35 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
+exe '3resize ' . ((&lines * 36 + 37) / 75)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
 tabnext
 edit src/Entity.cpp
 let s:save_splitbelow = &splitbelow
@@ -158,11 +169,11 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe '2resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
-exe '3resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 3resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 38 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
+exe '3resize ' . ((&lines * 33 + 37) / 75)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
 argglobal
 balt include/Player.h
 setlocal fdm=manual
@@ -175,12 +186,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 13 - ((12 * winheight(0) + 25) / 50)
+let s:l = 1 - ((0 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 13
-normal! 0
+keepjumps 1
+normal! 023|
 wincmd w
 argglobal
 if bufexists(fnamemodify("include/Entity.h", ":p")) | buffer include/Entity.h | else | edit include/Entity.h | endif
@@ -198,12 +209,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 18 - ((17 * winheight(0) + 12) / 25)
+let s:l = 16 - ((15 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 18
-normal! 023|
+keepjumps 16
+normal! 08|
 wincmd w
 argglobal
 if bufexists(fnamemodify("include/Position.h", ":p")) | buffer include/Position.h | else | edit include/Position.h | endif
@@ -221,18 +232,18 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 13 - ((0 * winheight(0) + 12) / 24)
+let s:l = 12 - ((11 * winheight(0) + 16) / 33)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 13
-normal! 0
+keepjumps 12
+normal! 05|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe '2resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
-exe '3resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 3resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 38 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
+exe '3resize ' . ((&lines * 33 + 37) / 75)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
 tabnext
 edit src/GameMap.cpp
 let s:save_splitbelow = &splitbelow
@@ -255,11 +266,11 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe '2resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
-exe '3resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 3resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 38 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
+exe '3resize ' . ((&lines * 33 + 37) / 75)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -271,19 +282,19 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 75 - ((30 * winheight(0) + 25) / 50)
+let s:l = 190 - ((9 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 75
-normal! 05|
+keepjumps 190
+normal! 035|
 wincmd w
 argglobal
 if bufexists(fnamemodify("main.cpp", ":p")) | buffer main.cpp | else | edit main.cpp | endif
 if &buftype ==# 'terminal'
   silent file main.cpp
 endif
-balt src/GameMap.cpp
+balt include/GenerationParams.h
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -294,12 +305,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 20 - ((19 * winheight(0) + 12) / 25)
+let s:l = 22 - ((21 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 20
-normal! 016|
+keepjumps 22
+normal! 022|
 wincmd w
 argglobal
 if bufexists(fnamemodify("include/GameMap.h", ":p")) | buffer include/GameMap.h | else | edit include/GameMap.h | endif
@@ -317,18 +328,115 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 30 - ((18 * winheight(0) + 12) / 24)
+let s:l = 28 - ((18 * winheight(0) + 16) / 33)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 30
-normal! 015|
+keepjumps 28
+normal! 041|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe '2resize ' . ((&lines * 25 + 26) / 53)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
-exe '3resize ' . ((&lines * 24 + 26) / 53)
-exe 'vert 3resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 38 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
+exe '3resize ' . ((&lines * 33 + 37) / 75)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
+tabnext
+edit src/Player.cpp
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe '1resize ' . ((&lines * 36 + 37) / 75)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 35 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 158 + 158) / 316)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
+argglobal
+balt include/Prey.h
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 23 - ((3 * winheight(0) + 18) / 36)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 23
+normal! 0
+wincmd w
+argglobal
+if bufexists(fnamemodify("include/Prey.h", ":p")) | buffer include/Prey.h | else | edit include/Prey.h | endif
+if &buftype ==# 'terminal'
+  silent file include/Prey.h
+endif
+balt src/Player.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 7 - ((6 * winheight(0) + 17) / 35)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 7
+normal! 020|
+wincmd w
+argglobal
+if bufexists(fnamemodify("src/Prey.cpp", ":p")) | buffer src/Prey.cpp | else | edit src/Prey.cpp | endif
+if &buftype ==# 'terminal'
+  silent file src/Prey.cpp
+endif
+balt src/Player.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 26 - ((25 * winheight(0) + 36) / 72)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 26
+normal! 036|
+wincmd w
+exe '1resize ' . ((&lines * 36 + 37) / 75)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe '2resize ' . ((&lines * 35 + 37) / 75)
+exe 'vert 2resize ' . ((&columns * 158 + 158) / 316)
+exe 'vert 3resize ' . ((&columns * 157 + 158) / 316)
 tabnext
 edit include/Wall.h
 let s:save_splitbelow = &splitbelow
@@ -347,8 +455,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
 argglobal
 balt include/Position.h
 setlocal fdm=manual
@@ -361,12 +469,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 25) / 50)
+let s:l = 20 - ((19 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 0
+keepjumps 20
+normal! 02|
 wincmd w
 argglobal
 if bufexists(fnamemodify("src/Wall.cpp", ":p")) | buffer src/Wall.cpp | else | edit src/Wall.cpp | endif
@@ -384,20 +492,20 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 4 - ((0 * winheight(0) + 25) / 50)
+let s:l = 4 - ((3 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 4
 normal! 027|
 wincmd w
-exe 'vert 1resize ' . ((&columns * 118 + 118) / 236)
-exe 'vert 2resize ' . ((&columns * 117 + 118) / 236)
+exe 'vert 1resize ' . ((&columns * 158 + 158) / 316)
+exe 'vert 2resize ' . ((&columns * 157 + 158) / 316)
 tabnext
 argglobal
-if bufexists(fnamemodify("term://~/Documents/C/oop-put-course/project//3883:/usr/bin/zsh", ":p")) | buffer term://~/Documents/C/oop-put-course/project//3883:/usr/bin/zsh | else | edit term://~/Documents/C/oop-put-course/project//3883:/usr/bin/zsh | endif
+if bufexists(fnamemodify("term://~/Documents/C/oop-put-course/project//55268:/usr/bin/zsh", ":p")) | buffer term://~/Documents/C/oop-put-course/project//55268:/usr/bin/zsh | else | edit term://~/Documents/C/oop-put-course/project//55268:/usr/bin/zsh | endif
 if &buftype ==# 'terminal'
-  silent file term://~/Documents/C/oop-put-course/project//3883:/usr/bin/zsh
+  silent file term://~/Documents/C/oop-put-course/project//55268:/usr/bin/zsh
 endif
 balt include/Wall.h
 setlocal fdm=manual
@@ -408,13 +516,13 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 37 - ((36 * winheight(0) + 25) / 50)
+let s:l = 36 - ((35 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 37
-normal! 0
-tabnext 3
+keepjumps 36
+normal! 047|
+tabnext 6
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -428,7 +536,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

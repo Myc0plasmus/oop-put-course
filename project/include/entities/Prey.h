@@ -1,6 +1,6 @@
 #pragma once
 #include<bits/stdc++.h>
-#include "Position.h"
+#include "structs/Position.h"
 #include "Entity.h"
 #include "GameMap.h"
 

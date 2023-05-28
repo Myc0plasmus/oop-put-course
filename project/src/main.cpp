@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
-#include "include/Position.h"
-#include "include/Entity.h"
-#include "include/Player.h"
-#include "include/GameMap.h"
-#include "include/Wall.h"
-#include "include/Prey.h"
+#include "structs/Position.h"
+#include "entities/Entity.h"
+#include "entities/Player.h"
+#include "GameMap.h"
+#include "entities/Wall.h"
+#include "entities/Prey.h"
 #include<ncurses.h>
 
 using namespace std;

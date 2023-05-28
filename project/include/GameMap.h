@@ -1,11 +1,11 @@
 #pragma once
 #include<bits/stdc++.h>
-#include "Position.h"
-#include "Entity.h"
-#include "Player.h"
-#include "Wall.h"
-#include "GenerationParams.h"
-#include "Prey.h"
+#include "structs/Position.h"
+#include "entities/Entity.h"
+#include "entities/Player.h"
+#include "entities/Wall.h"
+#include "structs/GenerationParams.h"
+#include "entities/Prey.h"
 
 class Player;
 

@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
-#include "../include/Position.h"
-#include "../include/Entity.h"
-#include "../include/Wall.h"
+#include "structs/Position.h"
+#include "entities/Entity.h"
+#include "entities/Wall.h"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 #pragma once
 #include<bits/stdc++.h>
-#include "Position.h"
+#include "structs/Position.h"
 
 using namespace std;
 

@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
-#include "../include/Position.h"
-#include "../include/Entity.h"
-#include "../include/Player.h"
-#include "../include/GameMap.h"
+#include "structs/Position.h"
+#include "entities/Entity.h"
+#include "entities/Player.h"
+#include "GameMap.h"
 #include<ncurses.h>
 
 using namespace std;
