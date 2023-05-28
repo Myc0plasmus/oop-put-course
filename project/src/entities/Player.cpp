@@ -44,7 +44,7 @@ void Player::decide()
 			prefPosApplyVector(moveVector);
 			return;
 		}
-    } while(gameMap->moveFrame>=(float)(clock() - start));
+    } while(gameMap->moveFrame>=((float)(clock() - start)/CLOCKS_PER_SEC));
 	this->prefferedPos.reset(NULL);
 }
 

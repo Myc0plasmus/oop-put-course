@@ -23,7 +23,7 @@ string Prey::entityName()
 void Prey::decide()
 {
 	clock_t current = clock();
-	if(this->cooldown !=0 && 1000000 * this->gameMap->moveFrame > (float)(current-this->cooldown))
+	if(this->cooldown !=0 && this->gameMap->moveFrame > ((float)(current-this->cooldown) / CLOCKS_PER_SEC) )
 	{
 		this->prefferedPos.reset(NULL);
 		return;

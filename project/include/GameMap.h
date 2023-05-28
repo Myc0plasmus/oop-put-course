@@ -32,7 +32,7 @@ class GameMap{
 		
 
 	public:
-		const float moveFrame = 0.5;
+		const float moveFrame = 0.25;
 		Entity *** plane;
 		GameMap(int size);
 		GameMap(int size, int nfillprob, int ngen, generation_params* nparams_set );
