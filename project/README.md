@@ -1,13 +1,13 @@
 # This directory contains solution to the project
 
 # Features that were supposed to be implemented :
-- [o] random map generation
-- [o] player (p)
-- [o] player movement
-- [o] impecable Walls (\#)
-- [o] corpses that player can walk on (x) 
-- [o] randomly moving entities (o)
-- [o] extensive GameMap class maintaining the game during runtime
+- [x] random map generation
+- [x] player (p)
+- [x] player movement
+- [x] impecable Walls (\#)
+- [x] corpses that player can walk on (x) 
+- [x] randomly moving entities (o)
+- [x] extensive GameMap class maintaining the game during runtime
 - [ ] food system for all entities
 - [ ] health system for all entities
 - [ ] attack system for player
