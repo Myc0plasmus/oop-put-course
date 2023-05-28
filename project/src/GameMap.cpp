@@ -20,7 +20,7 @@ GameMap::GameMap(int size)
 	this->renderMap["Wall"] = '#';	
 	this->renderMap["player"] = 'p';	
 	this->renderMap["prey"] = 'o';
-	this->renderMap["dead"] = 'x';
+	this->renderMap["corpse"] = 'x';
 
 	//map generation
 	this->fillprob = 40;

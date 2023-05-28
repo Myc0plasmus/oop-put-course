@@ -5,9 +5,10 @@
 
 using namespace std;
 
-Wall::Wall() : name("Wall")
+Wall::Wall() 
 {
 	// assert(this->name == "verticalWall" || this->name == "horizontalWall");
+	this->name = "Wall";
 	this->pos.reset(new position());
 	this->prefferedPos = NULL;
 }
@@ -30,10 +31,6 @@ Wall::Wall(position * newpos) : Wall::Wall()
 	this->pos->y = newpos->y;
 }
 
-string Wall::entityName()
-{
-	return this->name;
-}
 
 void Wall::decide()
 {

@@ -7,6 +7,8 @@ using namespace std;
 
 class Entity{
 	protected:
+		string name;
+		Entity * standsOn;
 		unique_ptr<position> pos;
 		unique_ptr<position> prefferedPos;
 // strength
@@ -17,7 +19,7 @@ class Entity{
 	public:
 		Entity(){}
 		virtual ~Entity()=default;
-		virtual string entityName()=0;
+		string entityName();
 
 		position givePosition();
 		position givePrefferedPosition();

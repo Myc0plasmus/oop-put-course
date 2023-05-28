@@ -8,17 +8,14 @@
 using namespace std;
 
 
-Prey::Prey(GameMap * gameMapPtr) : name("prey")
+Prey::Prey(GameMap * gameMapPtr) 
 {
+	this->name = "prey";
 	this->pos = make_unique<position>(0,0);
 	this->prefferedPos = NULL;
 	this->gameMap = gameMapPtr;	
 }
 
-string Prey::entityName()
-{
-	return this->name;
-}
 
 void Prey::decide()
 {

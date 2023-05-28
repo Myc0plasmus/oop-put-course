@@ -10,7 +10,6 @@ class GameMap;
 
 class Player : public Entity{
 	private:
-		const string name;
 		bool gameOver;
 		map<char,position> moveMap;
 		GameMap * gameMap;
@@ -18,7 +17,6 @@ class Player : public Entity{
 		Player();
 		Player(GameMap * gameMapPtr);
 		bool isGameOver();
-		virtual string entityName() override;
 		virtual void decide() override;
 		virtual void setSpawnPoint() override;
 };

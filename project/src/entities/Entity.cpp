@@ -35,4 +35,7 @@ void Entity::confirmDecision(bool confirmation){
 	this->prefferedPos = NULL;
 }
 
-
+string Entity::entityName()
+{
+	return this->name;
+}

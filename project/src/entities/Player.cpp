@@ -7,7 +7,8 @@
 
 using namespace std;
 
-Player::Player() : name("player"), gameOver(false){
+Player::Player() : gameOver(false){
+	this->name = "player";
 	this->pos.reset(new position(15,15));
 	this->prefferedPos = NULL;
 	this->moveMap['w'] = position(0,-1);
@@ -19,10 +20,6 @@ Player::Player() : name("player"), gameOver(false){
 Player::Player(GameMap  * gameMapPtr) : Player::Player()
 {
 	this->gameMap = gameMapPtr;
-}
-
-string Player::entityName() {
-	return this->name;
 }
 
 void Player::decide()
